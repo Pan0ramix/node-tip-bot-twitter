@@ -1,70 +1,97 @@
-twitterfork of unek node-tip-bot - Biersteker/Strikerbee/Gielbier
+# SHIBACOIN Twitter Tip Bot
 
-node-tip-bot-twitter is an open-source node.js twitter bot for tipping with altcoins. 
+SHIBACOIN Twitter Tip Bot is an open-source node.js Twitter bot for tipping with SHIBACOIN (SHIC). 
 
-It is forked off uneks IRC node-tip-bot (https://github.com/unek/node-tip-bot)
-It uses [node-dogecoin](https://github.com/countable/node-dogecoin) for integration with your coin's JSON RPC API.
+It is forked from unek's IRC node-tip-bot (https://github.com/unek/node-tip-bot) and adapted for SHIBACOIN and Twitter.
+It uses [node-dogecoin](https://github.com/countable/node-dogecoin) for integration with SHIBACOIN's JSON RPC API.
 
-# Instalation
-To install node-tip-bot simply clone this repo and install dependencies:
+## Installation
+To install the SHIBACOIN Twitter Tip Bot simply clone this repo and install dependencies:
 ```bash
-git clone https://github.com/Biersteker/node-tip-bot-twitter
-cd node-tip-bot-twitter
+git clone https://github.com/yourusername/shibacoin-twitter-tip-bot
+cd shibacoin-twitter-tip-bot
 npm install
 ```
 After installation proceed to the configuration.
 
-# Configuration
-To configure, copy the `config/config.sample.yml` file to `config/config.yml`.
+## Configuration
+The configuration file `config/config.yml` has been pre-configured for SHIBACOIN. You need to:
 
-## twitter
-Create an application at dev.twitter.com and fill in your keys.
-* **consumer_key: ''
-* **consumer_secret: ''
-* **access_token_key: ''
-* **access_token_secret: '' 
+1. **Set up Twitter API credentials** - Create an application at [developer.twitter.com](https://developer.twitter.com) and fill in:
+   * **consumer_key**: Your Twitter app consumer key
+   * **consumer_secret**: Your Twitter app consumer secret  
+   * **access_token_key**: Your Twitter app access token key
+   * **access_token_secret**: Your Twitter app access token secret
+   * **twittername**: Your bot's Twitter handle (without @)
 
-## log
-Logging settings.
-* **file** - file to log to. Set to `false` to disable logging to file.
+2. **Configure SHIBACOIN daemon** - The RPC settings are pre-configured for SHIBACOIN:
+   * **host**: localhost
+   * **port**: 33863 (SHIBACOIN's default RPC port)
+   * **user**: shibarpc 
+   * **pass**: sh1bap@ss
 
-## rpc
-JSON RPC API connection info.
-* **host** - JSON RPC API hostname
-* **port** - API port (by default 22555 for dogecoin)
-* **user** - API username
-* **pass** - API password (keep that secure)
+3. **Adjust coin settings** if needed:
+   * **withdrawal_fee**: Fee charged on withdrawals (default: 1 SHIC)
+   * **min_withdraw**: Minimum withdrawal amount (default: 10 SHIC)
+   * **min_confirmations**: Required confirmations (default: 6)
+   * **min_tip**: Minimum tip amount (default: 1 SHIC)
 
-## coin
-Basic coin settings.
-* **withdrawal_fee** - fee charged on withdraw to cover up txfee, the rest goes to bot's wallet.
-* **min_withdraw** - minimum amount of coins to withdraw
-* **min_confirmations** - minimum amount of confirmations needed to tip/withdraw coins
-* **min_tip** - minimum amount of coins to tip
-* **short_name** - short coin's name (eg. `Đ` or `DOGE`)
-* **full_name** - full coin's name (eg. `dogecoin`)
+## SHIBACOIN Daemon Setup
+Before running the bot, you need to be running your SHIBACOIN daemon with JSON-RPC API enabled. Add this to your SHIBACOIN configuration file (e.g., `~/.shibacoin/shibacoin.conf`):
 
-# How to run it?
-Before running the bot, you have to be running your coin daemon with JSON-RPC API enabled. To enable, add this to your coin daemon configuration file (eg. `~/.dogecoin/dogecoin.conf`):
 ```ini
 server=1
 daemon=1
-rpcuser=<your username>
-rpcpassword=<your super secret password>
-rpcallowip=<your bot's ip address or just 127.0.0.1 if hosted on the same machine>
+rpcuser=shibarpc
+rpcpassword=sh1bap@ss
+rpcport=33863
+rpcallowip=127.0.0.1
 ```
-To run the bot simply use `node bin/tipbot` or `npm start`.
+
+## How to run
+To run the bot simply use:
+```bash
+node bin/tipbot
+```
+or
+```bash
+npm start
+```
 
 ## Commands
-Commands are executed by placing skeinbot <command> <arguments> in a tweet.
+Commands are executed by mentioning your bot with the keyword (default: `shibacoinbot`) followed by the command:
 
 | **Command** | **Arguments**     | **Description**
 |-------------|-------------------|--------------------------------------------------------------------
-| `balance`   |                   | displays your current wallet balance
-| `address`   |                   | displays address where you can send your funds to the tip bot
-| `withdraw`  | `<address>`       | withdraws your whole wallet balance to specified address
-| `tip`       | `<nick> <amount>` | sends the specified amount of coins to the specified nickname
-| `help`      |                   | displays configured help message (by default similiar to this one)
+| `balance`   |                   | displays your current SHIBACOIN wallet balance
+| `address`   |                   | displays address where you can send SHIBACOIN to the tip bot
+| `withdraw`  | `<address>`       | withdraws your whole wallet balance to specified SHIBACOIN address
+| `tip`       | `<@user> <amount>`| sends the specified amount of SHIBACOIN to the specified user
+| `help`      |                   | displays help message with available commands
 | `terms`     |                   | displays terms and conditions for using the tip bot
+
+## Example Usage
+```
+@yourbotname shibacoinbot tip @someuser 10
+@yourbotname shibacoinbot balance
+@yourbotname shibacoinbot address
+@yourbotname shibacoinbot withdraw SYourShibacoinAddressHere
+```
+
+## SHIBACOIN Resources
+- **Website**: https://shibapow.org
+- **Explorer**: https://explorer.shibacoinshic.org
+- **Discord**: https://discord.gg/8qZPeAjFnh
+- **Telegram**: https://t.me/ShibaCoinChat
+- **Twitter**: https://twitter.com/Shibacoin_Shic
+
+## Security Notice
+- Keep your Twitter API credentials secure
+- Use strong passwords for your SHIBACOIN wallet
+- Regularly backup your wallet
+- Monitor bot activity and balances
+
+## License
+MIT License
 
 

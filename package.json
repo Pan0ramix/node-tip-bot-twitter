@@ -1,7 +1,7 @@
 {
-  "name": "node-tip-bot-twitter",
+  "name": "shibacoin-twitter-tip-bot",
   "version": "1.0.1",
-  "description": "node.js based tipping bot for any coin",
+  "description": "node.js based SHIBACOIN tipping bot for Twitter",
   "main": "bin/tipbot",
   "dependencies": {
     "twitter": "~1.0.3",
@@ -13,27 +13,29 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node test-rpc.js",
+    "test-rpc": "node test-rpc.js",
     "start": "node bin/tipbot"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/unek/node-tip-bot"
+    "url": "https://github.com/yourusername/shibacoin-twitter-tip-bot"
   },
-  "author": "unek",
+  "author": "SHIBACOIN Community",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/unek/node-tip-bot/issues"
+    "url": "https://github.com/yourusername/shibacoin-twitter-tip-bot/issues"
   },
-  "homepage": "https://github.com/unek/node-tip-bot",
+  "homepage": "https://github.com/yourusername/shibacoin-twitter-tip-bot",
   "keywords": [
-    "dogecoin",
+    "shibacoin",
+    "shic",
+    "cryptocurrency",
     "bitcoin",
-    "litecoin",
     "altcoin",
     "tip",
     "tipbot",
-    "irc",
+    "twitter",
     "bot"
   ]
 }
